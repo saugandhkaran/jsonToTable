@@ -1,0 +1,17 @@
+<div>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Sl.no</th>
+        <th *ngFor="let header of tableHeaders" (click)="sortColumn(header)" scope="col">{{ header }}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="jsonData.length">
+      <tr *ngFor="let items of jsonData; let indexOfelement=index;">
+        <th scope="row">{{indexOfelement + 1}}</th>
+        <td *ngFor="let item of items | keyvalue">{{item.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-center" *ngIf="!jsonData.length">No data found</p>
+</div>
