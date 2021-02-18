@@ -29,7 +29,7 @@ export class FilterComponent implements OnInit {
     this.filters = this._filterService.getAllFilters();
   }
 
-  addFilter() {
+  addFilter() :void{
     const filterConditionObject: FilterCategory = {
       category: this.condition.category,
       column: this.condition.column,
@@ -40,16 +40,16 @@ export class FilterComponent implements OnInit {
     this.applyFilters();
   }
 
-  resetValuesOfFilterObject() {
+  resetValuesOfFilterObject() :void{
     Object.keys(this.condition).forEach((item) => this.condition[item] = '');
   }
 
-  applyFilters() {
+  applyFilters() :void{
     this.filteredResultCount = this._filterService.filterResult(this.filterConditions);
     this.dataFiltered.emit('applied');
   }
 
-  removeFilter(index) {
+  removeFilter(index) :void{
     this.filterConditions.splice(index);
     this.applyFilters();
   }

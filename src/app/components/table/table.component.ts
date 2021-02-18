@@ -13,7 +13,7 @@ export class TableComponent {
   @Input() jsonData: Product[] = [];
   @Input() tableHeaders: string[];
 
-  sortColumn(category) {
+  sortColumn(category: string) :void{
     this._datastoreService.getTableData(0, 30);
     this.jsonData = this._datastoreService.sortData(category);
   }

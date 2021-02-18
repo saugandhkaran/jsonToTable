@@ -1,32 +1,29 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatastoreService {
-  jsonData = [];
-  modifiedData = [];
+  jsonData: Product[] = [];
+  modifiedData: Product[] = [];
   tableHeaders :string[] = [];
   constructor() { }
 
-  getAllProductList() {
-    
-  }
-
-  setJsonData(data) {
+  setJsonData(data: Product[]) {
     this.jsonData = data;
     this.modifiedData = this.jsonData;
   }
 
-  getJsonData() {
+  getJsonData(): Product[] {
     return this.jsonData;
   }
 
-  setCopyJsonData(data) {
+  setCopyJsonData(data: Product[]): void {
     this.modifiedData = data;
   }
 
-  setTableHeaders(data) {
+  setTableHeaders(data: string[]): void {
     this.tableHeaders = data;
   }
 
@@ -34,11 +31,11 @@ export class DatastoreService {
     return this.tableHeaders;
   }
 
-  getTableData(offset, amount) {
+  getTableData(offset: number, amount: number) {
     return this.modifiedData.slice(0, ((offset * amount + amount)));
   }
 
-  sortData(column) {
+  sortData(column: string) {
     this.modifiedData.sort((a, b) => {
       if (a[column] < b[column]) { return -1; }
       if (a[column] > b[column]) { return 1; }

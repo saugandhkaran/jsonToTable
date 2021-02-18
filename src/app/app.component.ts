@@ -13,24 +13,36 @@ export class AppComponent implements OnInit{
   title = 'productsup';
   jsonData: Product[] = [];
   tableHeaders: string[];
-  counter = 0;
+  counter: number = 0;
   subscription: Subscription;
 
   constructor(private _apiService: ApiService, private _datastoreService: DatastoreService) { }
 
   ngOnInit() {
-    this.getAllProducts();
+    this.setupTableDetails();
   }
 
-  getAllProducts() {
+  setupTableDetails(): void {
     this._apiService.getListOfProducts().subscribe((data) => {
       const subscribedData = Object.keys(data).map((item) => data[item]);
       const tableHeaders = Object.keys(subscribedData[0]).map(item => item).sort();
-      this._datastoreService.setJsonData(subscribedData);
-      this._datastoreService.setTableHeaders(tableHeaders)
-      this.tableHeaders = tableHeaders;
-      this.jsonData = this._datastoreService.getTableData(0, 30);
+      this.setProductDetails(subscribedData);
+      this.setTableHeaders(tableHeaders);
+      this.getAllProducts();
     }); 
+  }
+
+  getAllProducts(): void {
+    this.jsonData = this._datastoreService.getTableData(0, 30);
+  }
+
+  setProductDetails(items: Product[]): void {
+    this._datastoreService.setJsonData(items);
+  }
+
+  setTableHeaders(headers: string[]): void {
+    this._datastoreService.setTableHeaders(headers)
+    this.tableHeaders = headers;
   }
 
   getFilteredResults() {
