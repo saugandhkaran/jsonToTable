@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   tableHeaders: string[];
   counter: number = 0;
   subscription: Subscription;
+  error: string = '';
 
   constructor(private _apiService: ApiService, private _datastoreService: DatastoreService) { }
 
@@ -29,7 +30,11 @@ export class AppComponent implements OnInit{
       this.setProductDetails(subscribedData);
       this.setTableHeaders(tableHeaders);
       this.getAllProducts();
-    }); 
+    },
+      (error) => {
+        this.jsonData = []
+        this.error = error;
+      }); 
   }
 
   getAllProducts(): void {
