@@ -27,7 +27,7 @@ export class DatastoreService {
     this.tableHeaders = data;
   }
 
-  getTableHeaders() {
+  getTableHeaders(): string[] {
     return this.tableHeaders;
   }
 
