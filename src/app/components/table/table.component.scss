@@ -1,5 +1,9 @@
-thead {
+thead{
+  th{
+    position: sticky;
+    top:0;
   cursor: pointer;
+  }
 }
 td {
   max-width: 300px;
