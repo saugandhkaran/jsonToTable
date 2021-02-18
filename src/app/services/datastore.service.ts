@@ -35,7 +35,7 @@ export class DatastoreService {
     return this.modifiedData.slice(0, ((offset * amount + amount)));
   }
 
-  sortData(column: string) {
+  sortData(column: string): Product[] {
     this.modifiedData.sort((a, b) => {
       if (a[column] < b[column]) { return -1; }
       if (a[column] > b[column]) { return 1; }
